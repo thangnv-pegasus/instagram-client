@@ -1,0 +1,24 @@
+.swiper-button-next,
+.swiper-button-prev {
+  background-color: white;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 100%;
+  width: 24px !important;
+  height: 24px !important;
+  color: black;
+  top: 50%;
+  transform: translateY(50%);
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  content: "";
+  color: black;
+  font-size: 14px !important;
+}
+
+.swiper-slide {
+  width: fit-content;
+  overflow: hidden;
+}
