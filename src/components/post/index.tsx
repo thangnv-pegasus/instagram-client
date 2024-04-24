@@ -50,7 +50,7 @@ const Post = ({ post }: { post: IPost }) => {
               objectPosition: "center",
               borderRadius: "50%",
               padding: "4px",
-              zIndex: "999",
+              zIndex: "1",
             }}
           />
         </Link>

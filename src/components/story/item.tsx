@@ -4,7 +4,7 @@ const Item = () => {
   return (
     <>
       <div className="w-full h-16 relative bg-white">
-        <div className="absolute top-0 left-0 right-0 bottom-0 bg-gradient-to-tr from-amber-500 to-fuchsia-600 rounded-full"></div>
+        <div className="border-gradient"></div>
         <div className="absolute top-[2px] left-[2px] right-[2px] bottom-[2px] bg-white rounded-full">
           <Image
             src={

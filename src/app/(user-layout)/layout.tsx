@@ -7,9 +7,7 @@ const RootLayout = ({children} : {children: React.ReactNode}) => {
     return (
         <>
             <Bar />
-            <div className="pl-64">
             {children}
-            </div>
         </>
     )
 }

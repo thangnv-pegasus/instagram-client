@@ -15,6 +15,7 @@ import { FaHeart } from "react-icons/fa";
 import { FaRegCircleUser } from "react-icons/fa6";
 import { FaUserCircle } from "react-icons/fa";
 import { usePathname } from "next/navigation";
+import { IModal } from "@/types/modal";
 
 interface INavItem {
   name:
@@ -28,24 +29,77 @@ interface INavItem {
   href: string;
   classess?: string;
   title: string;
+  setOpenModal: React.Dispatch<React.SetStateAction<IModal>>;
+  openModal: IModal;
 }
 
-const NavItem = ({ href, name, title, classess = "" }: INavItem) => {
+const NavItem = ({
+  href,
+  name,
+  title,
+  classess = "",
+  setOpenModal,
+  openModal,
+}: INavItem) => {
   const path = usePathname();
+
+  const handleModal = () => {
+    if (
+      name === "home" ||
+      name === "explore" ||
+      name === "profile" ||
+      name === "reels"
+    ) {
+      setOpenModal({
+        searchModal: false,
+        messageModal: false,
+        notifyModal: false,
+      });
+    } else if (name === "search") {
+      setOpenModal((pre) => ({
+        messageModal: false,
+        notifyModal: false,
+        searchModal: true,
+      }));
+    } else if (name === "message") {
+      setOpenModal((pre) => ({
+        searchModal: false,
+        notifyModal: false,
+        messageModal: true,
+      }));
+    } else if (name === "notify") {
+      setOpenModal((pre) => ({
+        searchModal: false,
+        messageModal: false,
+        notifyModal: true,
+      }));
+    }
+  };
+
+  const CustomComponent = href === "/search" ? "div" : Link;
+
   return (
-    <Link
+    <CustomComponent
       href={href}
-      className={`flex items-center px-3 transtion-all ease-linear py-[10px] rounded-md hover:bg-gray-50 my-3 group ${classess}`}
+      className={`flex items-center px-3 cursor-pointer transtion-all ease-linear py-[10px] rounded-md hover:bg-gray-50 my-3 group ${classess}`}
+      onClick={() => handleModal()}
+      title={title}
     >
-      <span className="text-2xl transition-all ease-linear group-hover:scale-105">
+      <span className="text-2xl w-fit transition-all ease-linear group-hover:scale-105">
         {path === href ? (
           <Icon name={name} style="solid" />
         ) : (
           <Icon name={name} style="regular" />
         )}
       </span>
-      <p className={`ml-2 text-sm ${path===href && 'font-bold'}`}>{title}</p>
-    </Link>
+      {openModal.messageModal === false &&
+        openModal.notifyModal === false &&
+        openModal.searchModal === false && (
+          <p className={`ml-2 text-sm pr-10 ${path === href && "font-bold"}`}>
+            {title}
+          </p>
+        )}
+    </CustomComponent>
   );
 };
 
@@ -74,7 +128,7 @@ const Icon = ({
     return <AiOutlineCompass />;
   } else if (name === "reels") {
     if (style === "solid") {
-      return <FaClapperboard />
+      return <FaClapperboard />;
     }
     return <CgClapperBoard />;
   } else if (name === "message") {
@@ -89,7 +143,7 @@ const Icon = ({
     return <FaRegHeart />;
   } else if (name === "profile") {
     if (style === "solid") {
-        return <FaUserCircle />;
+      return <FaUserCircle />;
     }
     return <FaRegCircleUser />;
   }

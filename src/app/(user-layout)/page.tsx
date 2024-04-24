@@ -1,6 +1,6 @@
 import Post from "@/components/post";
 import StorySlide from "@/components/slider/story-slide";
-import RelatedUser from "@/components/user/related";
+import RelatedUser from "@/components/users/related";
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -12,7 +12,8 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <div className="flex w-full px-28 py-10">
+   <div className="pl-64">
+     <div className="flex w-full px-28 py-10">
       <div className="flex-1 pr-20">
         <StorySlide />
         <div className="px-10 py-10">
@@ -162,5 +163,6 @@ export default function Home() {
         <p className="text-xs text-gray-550 mt-5">© 2024 INSTAGRAM FROM META</p>
       </div>
     </div>
+   </div>
   );
 }

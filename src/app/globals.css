@@ -34,3 +34,20 @@ body {
     text-wrap: balance;
   }
 }
+
+@layer components {
+  .border-gradient {
+    /* absolute top-0 left-0 right-0 bottom-0 bg-gradient-to-tr from-amber-500 to-fuchsia-600 rounded-full */
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: linear-gradient(
+      to top right,
+      theme("backgroundColor.amber.500"),
+      theme('backgroundColor.fuchsia.600')
+    );
+    border-radius: 50%;
+  }
+}
