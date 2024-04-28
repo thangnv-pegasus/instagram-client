@@ -1,21 +1,32 @@
 import Avatar from "../users/avatar";
 
-const MessageItem = () => {
+const Message = ({
+  position = "left",
+  message = "message",
+  avatarUrl = "",
+}: {
+  position?: "left" | "right";
+  message: string;
+  avatarUrl?: string;
+}) => {
   return (
-    <div className="py-2 px-5 transition-all ease-linear hover:bg-gray-150 cursor-pointer">
-      <div className="flex items-center">
-        <Avatar key={1} type="no-border" />
-        <div className="text-sm pl-2">
-          <p>Chii Nguyễn</p>
-          <div className="flex items-center text-xs text-gray-550">
-            <p>Nhanhhhh...</p>
-            <p className="w-1 h-1 bg-gray-850 rounded-full mx-1"></p>
-            <p>10 weeks</p>
-          </div>
-        </div>
-      </div>
+    <div
+      className={`flex w-full my-2 items-center ${
+        position === "left" ? "justify-start" : "justify-end"
+      }`}
+    >
+      {position === "left" && <Avatar type="no-border" key={1} size="small" />}
+      <p
+        className={`bg-gray-750 py-2 px-4 text-sm max-w-96 ${
+          position === "left"
+            ? "rounded-tr-3xl rounded-br-3xl rounded-tl-lg rounded-bl-lg"
+            : "rounded-tl-3xl rounded-bl-3xl rounded-tr-lg order-3"
+        }`}
+      >
+        {message}
+      </p>
     </div>
   );
 };
 
-export default MessageItem;
+export default Message;
