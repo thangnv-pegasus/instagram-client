@@ -20,7 +20,7 @@ const Bar = () => {
   });
 
   return (
-    <div className="fixed w-fit top-0 bottom-0 left-0 h-screen bg-white border-r-[1px] border-solid border-gay-300 p-3 z-50">
+    <div className="fixed w-fit top-0 bottom-0 left-0 h-screen bg-white border-r-[1px] border-solid border-gay-300 p-3 z-[999]">
       <div className="flex flex-col justify-between h-full">
         <div>
           {openModal.messageModal !== false ||

@@ -5,6 +5,7 @@ import { FcGoogle } from "react-icons/fc";
 import Image from "next/image";
 import AutoSlide from "@/components/slider/auto-slide";
 import Link from "next/link";
+import LoginForm from "./login-form";
 
 export const metadata: Metadata = {
   title: "Đăng nhập",
@@ -27,52 +28,7 @@ const Page = () => {
             title="Instagram"
             className="w-44 block mb-10 mt-8 mx-auto"
           />
-          <form action="" method="post" className="block space-y-4">
-            <div className="relative">
-              <input
-                type="text"
-                id="hs-floating-input-username"
-                className="peer p-4 text-sm w-96 block bg-gray-650 border-gray-300 border-solid border-[1px] rounded-lg placeholder:text-transparent 
-                disabled:opacity-50 disabled:pointer-events-none 
-                focus:pt-6 focus:pb-2 [&:not(:placeholder-shown)]:pt-6 [&:not(:placeholder-shown)]:pb-2 autofill:pt-6 autofill:pb-2"
-                placeholder="Số điện thoại, tên người dùng hoặc email"
-              />
-              <label
-                htmlFor="hs-floating-input-username"
-                className="absolute top-0 text-sm start-0 p-4 h-full text-gray-600 truncate text-gray-[#444] pointer-events-none transition
-              ease-in-out duration-100 border border-transparent peer-disabled:opacity-50 peer-disabled:pointer-events-none 
-              peer-focus:text-xs peer-focus:-translate-y-2 peer-focus:text-gray-500 peer-[:not(:placeholder-shown)]:text-xs 
-              peer-[:not(:placeholder-shown)]:-translate-y-2 peer-[:not(:placeholder-shown)]:text-gray-500"
-              >
-                Số điện thoại, tên người dùng hoặc email
-              </label>
-            </div>
-            <div className="relative">
-              <input
-                type="password"
-                id="hs-floating-input-password"
-                className="peer p-4 text-sm w-96 block bg-gray-650 border-gray-300 border-solid border-[1px] rounded-lg placeholder:text-transparent 
-                disabled:opacity-50 disabled:pointer-events-none 
-                focus:pt-6 focus:pb-2 [&:not(:placeholder-shown)]:pt-6 [&:not(:placeholder-shown)]:pb-2 autofill:pt-6 autofill:pb-2"
-                placeholder="Mật khẩu"
-              />
-              <label
-                htmlFor="hs-floating-input-password"
-                className="absolute top-0 text-sm start-0 p-4 h-full text-gray-600 truncate text-gray-[#444] pointer-events-none transition
-              ease-in-out duration-100 border border-transparent peer-disabled:opacity-50 peer-disabled:pointer-events-none 
-              peer-focus:text-xs peer-focus:-translate-y-2 peer-focus:text-gray-500 peer-[:not(:placeholder-shown)]:text-xs 
-              peer-[:not(:placeholder-shown)]:-translate-y-2 peer-[:not(:placeholder-shown)]:text-gray-500"
-              >
-                Mật khẩu
-              </label>
-            </div>
-            <button
-              type="submit"
-              className="block w-full select-none py-3 text-center bg-sky-500 text-white text-sm rounded-md"
-            >
-              Đăng nhập
-            </button>
-          </form>
+          <LoginForm />
           <div className="relative w-full py-5">
             <div className="absolute top-1/2 -translate-y-1/2 w-36 h-0.5 bg-gray-300 left-0"></div>
             <p className="text-center text-xs text-gray-600 tracking-widest uppercase">

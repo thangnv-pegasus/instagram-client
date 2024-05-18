@@ -11,7 +11,11 @@ const nextConfig = {
     ];
   },
   images: {
-    domains: ["scontent.fhan20-1.fna.fbcdn.net", "scontent.cdninstagram.com","instagram.fhan2-3.fna.fbcdn.net"],
+    domains: [
+      "scontent.fhan20-1.fna.fbcdn.net",
+      "scontent.cdninstagram.com",
+      "instagram.fhan2-3.fna.fbcdn.net",
+    ],
   },
 };
 

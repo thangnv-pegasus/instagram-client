@@ -22,6 +22,7 @@ const config: Config = {
         "gray-650": "#fafafa00",
         "gray-150": "#efefef",
         "gray-50": "rgba(0,0,0,0.05)",
+        "gray-250": "rgba(0,0,0,0.4)",
         "gray-750": "rgb(239, 239, 239)",
         "gray-850": "#c8c8c8",
       },

@@ -50,4 +50,16 @@ body {
     );
     border-radius: 50%;
   }
+
+  .border-gray{
+     /* absolute top-0 left-0 right-0 bottom-0 bg-gradient-to-tr from-amber-500 to-fuchsia-600 rounded-full */
+     position: absolute;
+     top: 0;
+     left: 0;
+     right: 0;
+     bottom: 0;
+     background-color: #dbdbdb;
+     border-radius: 50%;
+  }
 }
+

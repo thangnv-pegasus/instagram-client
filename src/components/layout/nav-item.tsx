@@ -76,7 +76,7 @@ const NavItem = ({
     }
   };
 
-  const CustomComponent = href === "/search" ? "div" : Link;
+  const CustomComponent = href === "/search" || href === '/notify' ? "div" : Link;
 
   return (
     <CustomComponent
