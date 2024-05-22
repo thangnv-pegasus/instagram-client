@@ -6,12 +6,16 @@ import Link from "next/link";
 import RegisterForm from "./resgister-form";
 import LinkForm from "./form-link";
 import { Metadata } from "next";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Đăng ký",
   description: "Trang đăng ký",
 };
-
+if (cookies().get("token")) {
+  redirect("/");
+}
 const Page = () => {
   return (
     <div className="flex justify-center my-10 rounded-sm">

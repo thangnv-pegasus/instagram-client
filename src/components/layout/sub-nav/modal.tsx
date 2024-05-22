@@ -2,6 +2,7 @@ import { IModal } from "@/types/modal";
 import SearchModal from "./search-modal";
 import MessageModal from "./message-modal";
 import NotifyModal from "./notify-modal";
+import { usePathname } from "next/navigation";
 
 const Modal = ({ openModal }: { openModal: IModal }) => {
   return (

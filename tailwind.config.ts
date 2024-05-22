@@ -29,6 +29,7 @@ const config: Config = {
       width: {
         "580px": "36.25rem",
         "400px": "25rem",
+        '730px': '45.625rem'
       },
       height: {
         "580px": "36.25rem",

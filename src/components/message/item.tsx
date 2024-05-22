@@ -15,9 +15,9 @@ const Message = ({
         position === "left" ? "justify-start" : "justify-end"
       }`}
     >
-      {position === "left" && <Avatar type="no-border" key={1} size="small" />}
+      {position === "left" && <Avatar type="no-border" key={1} size="mini" />}
       <p
-        className={`bg-gray-750 py-2 px-4 text-sm max-w-96 ${
+        className={`bg-gray-750 py-2 px-4 mx-2 text-sm max-w-96 ${
           position === "left"
             ? "rounded-tr-3xl rounded-br-3xl rounded-tl-lg rounded-bl-lg"
             : "rounded-tl-3xl rounded-bl-3xl rounded-tr-lg order-3"

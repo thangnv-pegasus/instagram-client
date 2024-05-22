@@ -6,15 +6,21 @@ const Avatar = ({
   borderColor = "gradient",
 }: {
   type: "border" | "no-border";
-  size?: "normal" | "small" | "big";
+  size?: "normal" | "small" | "big" | "mini";
   borderColor?: "gradient" | "gray";
 }) => {
   return (
     <div
       className={`relative bg-white rounded-full ${
-        type === "border" ? "w-11 h-11" : "w-12 h-12"
-      } ${size === "big" ? "w-32 h-32" : ""} ${
-        size === "normal" ? "w-20 h-20" : ""
+        size === "big"
+          ? "size-32"
+          : size === "normal"
+          ? "size-20"
+          : size === "small"
+          ? "size-12"
+          : size === "mini"
+          ? "size-8"
+          : ""
       } `}
     >
       {type === "border" && borderColor === "gradient" && (
@@ -24,22 +30,32 @@ const Avatar = ({
         <div className="border-gray"></div>
       )}
       <div
-        className={`absolute flex items-center justify-center rounded-full bg-white ${
-          type === "border"
-            ? "top-[2px] left-[2px] right-[2px] bottom-[2px] "
-            : "top-0 left-0 right-0 bottom-0"
-        }`}
+        className={`absolute flex items-center justify-center rounded-full bg-white `}
       >
         <Image
-          src={
-            "https://scontent.fhan20-1.fna.fbcdn.net/v/t39.30808-6/434167227_3693817797567291_6964945424826758680_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeFIPA-cDY7ur9SirGe0CDYA5Z9FbFzFj4Pln0VsXMWPg3TSlT3AHnyJ0D_dOvblH0Ifhxsn1bTjTnIg6MwSwUHm&_nc_ohc=KrGiwoizLSQAb5j_y2E&_nc_ht=scontent.fhan20-1.fna&oh=00_AfAZ3zCaZ3RvII2fUjNlGdZZ6LFafp20SEitFWIy7pP9Vw&oe=6621B440"
-          }
+          src={"https://placehold.it/200x200"}
           alt="image"
           width={120}
           height={120}
           style={{
-            width: size === "normal" || size === "big" ? "100%" : "60%",
-            height: size === "normal" || size === "big" ? "100%" : "60%",
+            width: `${
+              size === "big"
+                ? "128px"
+                : size === "normal"
+                ? "56px"
+                : size === "small"
+                ? "48px"
+                : "32px"
+            }`,
+            height: `${
+              size === "big"
+                ? "128px"
+                : size === "normal"
+                ? "56px"
+                : size === "small"
+                ? "48px"
+                : "32px"
+            }`,
             objectFit: "cover",
             objectPosition: "center",
             display: "block",

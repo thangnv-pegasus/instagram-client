@@ -20,7 +20,7 @@ const PostMini = ({
       } ${classess}`}
     >
       <Image
-        src="https://instagram.fhan2-3.fna.fbcdn.net/v/t51.29350-15/435338555_2206342546424247_7967802739527471377_n.jpg?stp=dst-jpg_e35_p720x720&efg=eyJ2ZW5jb2RlX3RhZyI6ImltYWdlX3VybGdlbi4xNDQweDE3OTkuc2RyLmYyOTM1MCJ9&_nc_ht=instagram.fhan2-3.fna.fbcdn.net&_nc_cat=1&_nc_ohc=wRKGb4eEGTQAb4SB8Cz&edm=AI8qBrIBAAAA&ccb=7-5&ig_cache_key=MzMzOTQ5MjI2MjM1NDE5NzY1MA%3D%3D.2-ccb7-5&oh=00_AfAALwrtqJbOndorKzu7fMgN1kvbkPIPieDJseT-FDIIjg&oe=662E76D7&_nc_sid=469e9a"
+        src="https://placehold.it/200x200"
         alt="post name"
         height={200}
         width={200}

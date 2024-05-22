@@ -4,7 +4,7 @@ import Link from "next/link";
 interface IUser {
   avatar: string;
   name: string;
-  id: number;
+  id: Number;
 }
 
 const RelatedUser = ({ user }: { user: IUser }) => {
@@ -13,7 +13,7 @@ const RelatedUser = ({ user }: { user: IUser }) => {
       <div className="flex items-center">
         <div className="w-fit rounded-full overflow-hidden border-[1px] border-solid border-gray-300">
           <Image
-            src={user.avatar}
+            src={user.avatar || 'https://placehold.it/100x100'}
             alt={user.name}
             width={52}
             height={52}

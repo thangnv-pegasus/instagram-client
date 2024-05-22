@@ -9,6 +9,8 @@ import { CiBookmark } from "react-icons/ci";
 import { FaBookmark } from "react-icons/fa";
 import { useRef, useState } from "react";
 import InputEmoji from "react-input-emoji";
+import { IPostPaginate } from "@/types/home";
+import PostImage from "./post-image";
 
 interface IPost {
   avatar: string;
@@ -23,14 +25,14 @@ interface IPost {
   isMark: boolean;
 }
 
-const Post = ({ post }: { post: IPost }) => {
+const Post = ({ post }: { post: IPostPaginate }) => {
   const inputRef = useRef();
   const [text, setText] = useState("");
   function handleOnEnter() {
     console.log("enter", text);
   }
   return (
-    <div>
+    <div className="mb-5">
       <div className="flex items-center py-2">
         <Link
           href={""}
@@ -38,8 +40,8 @@ const Post = ({ post }: { post: IPost }) => {
         >
           <div className="absolute top-[2px] left-[2px] right-[2px] bottom-[2px] bg-white rounded-full"></div>
           <Image
-            src={post.avatar}
-            alt={post.author}
+            src={post.user_profile.avatar_url ?? 'https://placehold.it/100x100'}
+            alt={post.user_profile.nickname}
             // width={50}
             // height={50}
             fill
@@ -55,28 +57,18 @@ const Post = ({ post }: { post: IPost }) => {
           />
         </Link>
         <Link href={""} className="text-xs font-semibold ml-2">
-          {post.author}
+          {post.user_profile.nickname}
         </Link>
         <p className="text-xs text-gray-550 font-medium ml-[10px] relative after:content-[''] after:absolute after:w-1 after:h-1 after:-left-[6px] after:bg-black after:rounded-full after:top-1/2 after:-translate-y-1/2">
-          {post.created_at}
+          {post.post_detail.created_at + ''}
         </p>
       </div>
       <div className="relative w-full h-[468px] border-[1px] border-solid border-gray-400 rounded-md overflow-hidden">
-        <Image
-          src={post.image ?? ""}
-          alt="post"
-          fill
-          style={{
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            objectPosition: "center",
-          }}
-        />
+        <PostImage images_id={post.images_id} />
       </div>
       <div className="flex justify-between items-center pt-2 pb-1">
         <div className="flex items-center">
-          {post.isLike === true ? (
+          {/* {post.isLike === true ? (
             <button className="text-3xl">
               <FaHeart />
             </button>
@@ -84,7 +76,7 @@ const Post = ({ post }: { post: IPost }) => {
             <button className="text-3xl">
               <CiHeart />
             </button>
-          )}
+          )} */}
           <button className="text-xl mx-2">
             <FaRegMessage />
           </button>
@@ -93,15 +85,15 @@ const Post = ({ post }: { post: IPost }) => {
           </button>
         </div>
         <button className="text-2xl">
-          {post.isMark === true ? <FaBookmark /> : <CiBookmark />}
+          {/* {post.isMark === true ? <FaBookmark /> : <CiBookmark />} */}
         </button>
       </div>
-      <p className="text-sm font-semibold px-1">{post.total_like} lượt thích</p>
+      <p className="text-sm font-semibold px-1">{post.post_detail.like_total} lượt thích</p>
       <div className="flex items-center line-clamp-1 my-1 text-sm px-1">
         <Link href={""} className="font-semibold mr-2">
-          {post.author}
+          {post.user_profile.nickname}
         </Link>
-        <div className="text-sm">{post.title}</div>
+        <div className="text-sm">{post.post_detail.caption}</div>
       </div>
       <button className="my-2 text-sm text-gray-400 px-1">
         Xem tất cả bình luận

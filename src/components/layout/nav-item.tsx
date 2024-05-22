@@ -42,6 +42,7 @@ const NavItem = ({
   openModal,
 }: INavItem) => {
   const path = usePathname();
+  
 
   const handleModal = () => {
     if (
@@ -76,12 +77,13 @@ const NavItem = ({
     }
   };
 
-  const CustomComponent = href === "/search" || href === '/notify' ? "div" : Link;
+  const CustomComponent =
+    href === "/search" || href === "/notify" ? "div" : Link;
 
   return (
     <CustomComponent
       href={href}
-      className={`flex items-center px-3 cursor-pointer transtion-all ease-linear py-[10px] rounded-md hover:bg-gray-50 my-3 group ${classess}`}
+      className={`flex w-fit items-center px-3 cursor-pointer transtion-all ease-linear py-[10px] rounded-md hover:bg-gray-50 my-3 group ${classess}`}
       onClick={() => handleModal()}
       title={title}
     >

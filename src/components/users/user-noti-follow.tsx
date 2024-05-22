@@ -4,7 +4,7 @@ import Avatar from "./avatar";
 const UserNoti = () => {
   return (
     <div className="flex items-center py-3 px-6 text-sm cursor-pointer transition-all ease-linear hover:bg-gray-150">
-      <Avatar type="no-border" size="normal" />
+      <Avatar type="no-border" size="small" />
       <div className="flex-1 flex items-center flex-wrap ml-2 select-none pr-5">
         <p>
           <Link href={""} className="font-semibold mr-1">

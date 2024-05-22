@@ -3,21 +3,32 @@
 import Image from "next/image";
 import NavItem from "./nav-item";
 import instagram from "@/components/logo/instagram.svg";
+// import intagram2 from '@/'
 import Link from "next/link";
 import { BiLogOut } from "react-icons/bi";
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import Modal from "./sub-nav/modal";
 import { FaInstagram } from "react-icons/fa6";
 import { IModal } from "@/types/modal";
-import { usePathname } from "next/navigation";
+import { redirect, usePathname } from "next/navigation";
 
 const Bar = () => {
-  const pathname = usePathname()
+  const pathname = usePathname();
   const [openModal, setOpentModal] = useState<IModal>({
-    searchModal: pathname === '/search' ? true : false,
-    messageModal: pathname === '/message' ? true : false,
-    notifyModal: pathname === '/notify' ? true : false,
+    searchModal: pathname === "/search" ? true : false,
+    messageModal: pathname === "/message" ? true : false,
+    notifyModal: pathname === "/notify" ? true : false,
   });
+
+  const handleLogout = async () => {
+    const responseNextServer = await fetch('/api/auth/logout',{
+      method: 'post'
+    })
+    .then(res => res.json())
+    if(responseNextServer?.status === 200){
+      redirect('/login')
+    }
+  }
 
   return (
     <div className="fixed w-fit top-0 bottom-0 left-0 h-screen bg-white border-r-[1px] border-solid border-gay-300 p-3 z-[999]">
@@ -32,8 +43,8 @@ const Bar = () => {
               title="Trang chủ"
               onClick={() =>
                 setOpentModal({
-                  messageModal: false,
                   notifyModal: false,
+                  messageModal: false,
                   searchModal: false,
                 })
               }
@@ -101,7 +112,7 @@ const Bar = () => {
             openModal={openModal}
           />
         </div>
-        <button className="flex w-full px-3 py-[10px] transition-all ease-linear items-center my-3 hover:bg-gray-50 group">
+        <button className="flex w-full px-3 py-[10px] transition-all ease-linear items-center my-3 hover:bg-gray-50 group" onClick={() => handleLogout()}>
           <span className="text-2xl transition-all ease-linear group-hover:scale-105">
             <BiLogOut />
           </span>{" "}
@@ -112,9 +123,9 @@ const Bar = () => {
             )}
         </button>
       </div>
-      {(
-        openModal.notifyModal === true ||
-        openModal.searchModal === true) && <Modal openModal = {openModal}/>}
+      {(openModal.notifyModal === true || openModal.searchModal === true) && (
+        <Modal openModal={openModal} />
+      )}
     </div>
   );
 };

@@ -6,12 +6,18 @@ import Image from "next/image";
 import AutoSlide from "@/components/slider/auto-slide";
 import Link from "next/link";
 import LoginForm from "./login-form";
-
+import { cookies } from "next/headers";
+import { redirect } from 'next/navigation'
 export const metadata: Metadata = {
   title: "Đăng nhập",
   description: "Trang đăng nhập",
 };
 const Page = () => {
+
+  if(cookies().get('token')){
+    redirect('/')
+  }
+
   return (
     <div className="flex justify-center items-center h-screen w-full overflow-hidden">
       <div className="relative block bg-homephone bg-homephone_size h-580px w-580px -mr-20 bg-no-repeat">

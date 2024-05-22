@@ -17,7 +17,7 @@ const UserItem = ({
       className="flex justify-between w-full hover:bg-gray-750 px-6 py-2"
     >
       <div className="flex items-center">
-        <Avatar />
+        <Avatar type="no-border" size="small"/>
         <div className="ml-2">
           <Link href={""} className="block text-sm font-semibold">
             chin_db

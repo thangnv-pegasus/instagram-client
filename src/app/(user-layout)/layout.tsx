@@ -1,3 +1,4 @@
+import ButtonLogout from "@/components/layout/logout-btn"
 import Bar from "@/components/layout/nav-bar"
 
 
@@ -7,6 +8,7 @@ const RootLayout = ({children} : {children: React.ReactNode}) => {
     return (
         <>
             <Bar />
+                
             {children}
         </>
     )

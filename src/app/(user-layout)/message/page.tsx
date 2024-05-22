@@ -66,7 +66,7 @@ const Page = () => {
         <div className="flex flex-col flex-1 h-screen">
           <div className="flex items-center justify-between py-4 px-5 border-b-[1px] border-solid border-gray-850">
             <Link href={""} className="flex items-center">
-              <Avatar type="no-border" />
+              <Avatar type="no-border" size="small" />
               <p className="font-semibold ml-3">Chii Nguyễn</p>
             </Link>
             <div className="flex items-center text-2xl gap-x-4">
