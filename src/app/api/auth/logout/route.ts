@@ -1,5 +1,5 @@
 import { cookies } from "next/headers";
-
+import { redirect } from 'next/navigation'
 export async function POST(request: Request) {
   const cookie = cookies();
   const token = cookie.get("token")?.value;
@@ -15,8 +15,9 @@ export async function POST(request: Request) {
           },
         }
       ).then((res) => res.json());
-      console.log(response);
+      // console.log(response);
       cookie.delete("token");
+      redirect('/login')
       return Response.json(response, {
         status: 200,
         headers: {

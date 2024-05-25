@@ -2,19 +2,19 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
+
 const UserLogoutBtn = ({
   user,
 }: {
   user: { avatar_url: string; nickname: string; fullname: string };
 }) => {
+  const router = useRouter()
   const handleLogout = async () => {
     const responseNextServer = await fetch("/api/auth/logout", {
       method: "post",
     }).then((res) => res.json());
-    if (responseNextServer?.status === 200) {
-      redirect("/login");
-    }
+      router.push('/login')
   };
 
   return (

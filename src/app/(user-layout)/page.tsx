@@ -1,9 +1,7 @@
 import Footer from "@/components/layout/footer";
-import Post from "@/components/post";
 import StorySlide from "@/components/slider/story-slide";
 import RelatedUser from "@/components/users/related";
 import { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
@@ -18,7 +16,7 @@ export const metadata: Metadata = {
 
 export default async function Home() {
   const cookieStore = cookies();
-  const token = cookieStore.get("token");
+  const token = cookieStore.get("token")?.value;
   if (!token) {
     return redirect("/login");
   }
@@ -28,7 +26,6 @@ export default async function Home() {
       Authorization: "Bearer " + cookieStore.get("token")?.value,
     },
   }).then((res) => res.json());
-  // console.log("recommend", fetchApi?.recommnedUsers);
   return (
     <div className="pl-64">
       <div className="flex w-full px-28 py-10">

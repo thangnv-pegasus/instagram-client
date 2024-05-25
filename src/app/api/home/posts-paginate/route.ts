@@ -14,7 +14,7 @@ export async function GET(request: Request) {
         },
       }
     ).then((res) => res.json());
-    console.log(response);
+    // console.log(response);
     return Response.json(response, {
       status: 200,
     });

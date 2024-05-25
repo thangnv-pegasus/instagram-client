@@ -3,7 +3,6 @@
 import Image from "next/image";
 import NavItem from "./nav-item";
 import instagram from "@/components/logo/instagram.svg";
-// import intagram2 from '@/'
 import Link from "next/link";
 import { BiLogOut } from "react-icons/bi";
 import { ReactNode, useState } from "react";
@@ -11,9 +10,11 @@ import Modal from "./sub-nav/modal";
 import { FaInstagram } from "react-icons/fa6";
 import { IModal } from "@/types/modal";
 import { redirect, usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 const Bar = () => {
   const pathname = usePathname();
+  const router = useRouter()
   const [openModal, setOpentModal] = useState<IModal>({
     searchModal: pathname === "/search" ? true : false,
     messageModal: pathname === "/message" ? true : false,
@@ -25,9 +26,7 @@ const Bar = () => {
       method: 'post'
     })
     .then(res => res.json())
-    if(responseNextServer?.status === 200){
-      redirect('/login')
-    }
+    router.push('/login')
   }
 
   return (

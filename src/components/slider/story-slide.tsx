@@ -9,14 +9,43 @@ import Item from "../story/item";
 import "swiper/css/navigation";
 
 // Import Swiper React components
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/pagination';
+import "swiper/css";
+import "swiper/css/pagination";
+import StorySkeleton from "../story/story-skeleton";
+import { useEffect, useState } from "react";
+import { IStoryPaginate } from "@/types/home";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 const StorySlide = () => {
-  const arr = [1, 2, 3, 4, 5, 6, 7, 8,9,10,11];
+  const [items, setItems] = useState<Array<IStoryPaginate>>([]);
+  const [hasMore, setHasMore] = useState(true);
+  const [page, setPage] = useState(1);
+
+  useEffect(() => {
+    fetchItems(page);
+  }, [page]);
+
+  const fetchItems = async (page: number) => {
+    try {
+      const response = await fetch(`/api/home/story-paginate?page=${page}`, {
+        method: "get",
+      });
+      const res = await response.json();
+      setItems((prevItems) => [...prevItems, ...res.data]);
+      if (res.data.length === 0) {
+        setHasMore(false);
+      }
+    } catch (error) {
+      console.error("Error fetching items:", error);
+    }
+  };
+
+  const fetchMoreData = () => {
+    setPage((prevPage) => prevPage + 1);
+  };
   return (
     <div className="w-full">
       <Swiper
@@ -26,13 +55,20 @@ const StorySlide = () => {
         modules={[Pagination, Navigation]}
         className="mySwiper"
       >
-        {arr.map((item, index) => {
-          return (
-            <SwiperSlide key={index}>
-              <Item />
-            </SwiperSlide>
-          );
-        })}
+        <InfiniteScroll
+          dataLength={items.length}
+          next={fetchMoreData}
+          hasMore={hasMore}
+          loader={<StorySkeleton />}
+        >
+          {items.map((item, index) => {
+            return (
+              <SwiperSlide key={index}>
+                <Item story={item} />
+              </SwiperSlide>
+            );
+          })}
+        </InfiniteScroll>
       </Swiper>
     </div>
   );
