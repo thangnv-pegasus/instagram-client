@@ -14,8 +14,12 @@ const ListPost = () => {
     try {
       const response = await fetch(`/api/home/posts-paginate?page=${page}`);
       const data = await response.json();
-      // console.log(data)
-      setItems((prevItems) => [...prevItems, ...data.posts.data]);
+      console.log(data)
+      if (page === 1) {
+        setItems(data.posts.data);
+      } else {
+        setItems((prevItems) => [...prevItems, ...data.posts.data]);
+      }
 
       if (data.posts.data.length === 0) {
         setHasMore(false);
@@ -32,7 +36,6 @@ const ListPost = () => {
   useEffect(() => {
     fetchItems(page);
   }, [page]);
-
   return (
     <>
       <InfiniteScroll

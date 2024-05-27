@@ -34,7 +34,11 @@ const StorySlide = () => {
         method: "get",
       });
       const res = await response.json();
-      setItems((prevItems) => [...prevItems, ...res.data]);
+      if (page === 1) {
+        setItems(res.data);
+      } else {
+        setItems((prevItems) => [...prevItems, ...res.data]);
+      }
       if (res.data.length === 0) {
         setHasMore(false);
       }

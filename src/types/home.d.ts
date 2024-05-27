@@ -24,6 +24,7 @@ export interface IImage {
 export interface IPostPaginate {
   post_id: Number;
   user_id: Number;
+  is_like: boolean;
   images_id: Array<IImage>;
   post_detail: {
     caption: string;

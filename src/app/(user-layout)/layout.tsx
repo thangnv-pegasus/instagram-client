@@ -1,4 +1,3 @@
-import ButtonLogout from "@/components/layout/logout-btn"
 import Bar from "@/components/layout/nav-bar"
 
 

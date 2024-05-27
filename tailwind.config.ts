@@ -60,6 +60,9 @@ const config: Config = {
       boxShadow: {
         modal: "4px 0 24px rgba(0,0,0,0.15)",
       },
+      gridTemplateColumns: {
+        '7_5': '7fr 5fr'
+      }
     },
   },
   plugins: [],
