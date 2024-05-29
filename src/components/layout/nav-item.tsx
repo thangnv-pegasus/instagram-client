@@ -97,7 +97,7 @@ const NavItem = ({
       {openModal.messageModal === false &&
         openModal.notifyModal === false &&
         openModal.searchModal === false && (
-          <p className={`ml-2 text-sm pr-10 ${path === href && "font-bold"}`}>
+          <p className={`ml-2 text-sm w-32 ${path === href && "font-bold"}`}>
             {title}
           </p>
         )}

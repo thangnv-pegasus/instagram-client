@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { CiHeart } from "react-icons/ci";
-import { FaHeart } from "react-icons/fa";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { FaRegMessage } from "react-icons/fa6";
 import { FaRegPaperPlane } from "react-icons/fa";
 import { CiBookmark } from "react-icons/ci";
@@ -31,17 +31,15 @@ const Post = ({ post }: { post: IPostPaginate }) => {
     });
 
     const channel = pusher.subscribe("like-post");
+    
     channel.bind(
       "like-event",
       function (data: { id: number; likesCount: number; name: string }) {
         if (data.id == post.post_id) {
-          console.log({ data });
           setLikes(() => {
-            // console.log("check like");
             return data.likesCount;
           });
           setIsLike((pre) => !pre);
-          // console.log({ likes });
         }
       }
     );
@@ -50,7 +48,7 @@ const Post = ({ post }: { post: IPostPaginate }) => {
       channel.unbind_all();
       channel.unsubscribe();
     };
-  }, [post.post_id, likes]);
+  }, [post.post_id]);
 
   const handleLike = async () => {
     const res = await fetch(`/api/post/${post.post_id}/like`, {
@@ -118,7 +116,7 @@ const Post = ({ post }: { post: IPostPaginate }) => {
               </button>
             ) : (
               <button className="text-2xl" onClick={handleLike}>
-                <CiHeart />
+                <FaRegHeart />
               </button>
             )}
             <button
@@ -160,7 +158,16 @@ const Post = ({ post }: { post: IPostPaginate }) => {
         </form>
       </div>
       {showDetail === true && (
-        <PostDetail post={post} setShowDetail={setShowDetail} />
+        <PostDetail
+          post={post}
+          setShowDetail={setShowDetail}
+          likes={likes}
+          setLikes={setLikes}
+          isLike={isLike}
+          setIsLike={setIsLike}
+          handleLike={handleLike}
+          handleUnLike={handleUnlike}
+        />
       )}
     </>
   );

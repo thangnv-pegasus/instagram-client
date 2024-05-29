@@ -59,6 +59,7 @@ const config: Config = {
       },
       boxShadow: {
         modal: "4px 0 24px rgba(0,0,0,0.15)",
+        'top-gray': '0 -5px 8px rgba(0,0,0,0.05)'
       },
       gridTemplateColumns: {
         '7_5': '7fr 5fr'

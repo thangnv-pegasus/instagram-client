@@ -4,10 +4,12 @@ const Avatar = ({
   type,
   size = "normal",
   borderColor = "gradient",
+  image_url = 'https://placehold.it/200x200'
 }: {
   type: "border" | "no-border";
   size?: "normal" | "small" | "big" | "mini";
   borderColor?: "gradient" | "gray";
+  image_url?: string
 }) => {
   return (
     <div
@@ -24,16 +26,16 @@ const Avatar = ({
       } `}
     >
       {type === "border" && borderColor === "gradient" && (
-        <div className="border-gradient"></div>
+        <div className="border-story-gradient"></div>
       )}
       {type === "border" && borderColor === "gray" && (
-        <div className="border-gray"></div>
+        <div className="border-gray-850"></div>
       )}
       <div
         className={`absolute flex items-center justify-center rounded-full bg-white `}
       >
         <Image
-          src={"https://placehold.it/200x200"}
+          src={image_url ?? "https://placehold.it/200x200"}
           alt="image"
           width={120}
           height={120}

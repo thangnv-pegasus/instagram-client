@@ -15,7 +15,8 @@ const nextConfig = {
       "scontent.fhan20-1.fna.fbcdn.net",
       "scontent.cdninstagram.com",
       "instagram.fhan2-3.fna.fbcdn.net",
-      "placehold.it"
+      "placehold.it",
+      "dummyimage.com"
     ],
   },
 };
