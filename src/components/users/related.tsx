@@ -1,3 +1,4 @@
+'use client'
 import Image from "next/image";
 import Link from "next/link";
 
@@ -21,12 +22,12 @@ const RelatedUser = ({ user }: { user: IUser }) => {
           />
         </div>
         <div className="pl-2 pr-4">
-            <Link href={'/'} className="block leading-5 font-semibold text-sm">{user.name}</Link>
+            <Link href={`profile/${user.name}`} className="block leading-5 font-semibold text-sm">{user.name}</Link>
             <p className="text-xs text-gray-550">Gợi ý cho bạn</p>
         </div>
       </div>
       <Link
-        href={"/"}
+        href={``}
         className="block text-sky-600 transition-all text-xs ease-linear hover:text-gray-800"
       >
         Theo dõi

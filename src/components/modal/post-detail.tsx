@@ -22,8 +22,7 @@ import { FaRegPaperPlane } from "react-icons/fa";
 import { FaRegBookmark, FaBookmark } from "react-icons/fa6";
 import { durationMoment } from "@/utils/moment-duration";
 import InputEmojiWithRef from "react-input-emoji";
-import CommentItem from "../comment/item";
-import { ICcomment } from "@/types/comments";
+import InfiniteComment from "../comment/infinite-comment";
 const PostDetail = ({
   post,
   setShowDetail,
@@ -45,30 +44,10 @@ const PostDetail = ({
 }) => {
   const [text, setText] = useState("");
   const inputRef = useRef(null);
-  const [comments, setComments] = useState<Array<ICcomment>>([]);
 
   const handleOnEnter = (text: string) => {
     console.log("Enter:", text);
   };
-
-  const getComment = async () => {
-    try {
-      const fetchApi = await fetch(`api/comment/list?post=${post.post_id}`, {
-        method: "get",
-      });
-      const response = await fetchApi.json();
-      if (response.status == 200) {
-        console.log(response)
-        setComments(response.comments);
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  };
-  console.log(comments);
-  useEffect(() => {
-    getComment();
-  }, [post.post_id]);
 
   return (
     <div className="fixed top-0 left-0 right-0 bottom-0 bg-[rgba(89,89,89,0.2)] flex justify-center items-center z-[2000]">
@@ -142,10 +121,7 @@ const PostDetail = ({
               </div>
             </div>
             {/* comments */}
-            {comments.length > 0 &&
-              comments.map((item, index) => {
-                return <CommentItem comment={item} key={index} />;
-              })}
+            <InfiniteComment post_id={post.post_id} />
           </div>
           <div className="">
             <div className="px-5 py-3 border-b-[1px] border-solid border-gray-850 shadow-top-gray">
