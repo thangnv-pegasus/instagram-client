@@ -9,11 +9,11 @@ import { CiBookmark } from "react-icons/ci";
 import { FaBookmark } from "react-icons/fa";
 import { useEffect, useRef, useState } from "react";
 import InputEmoji from "react-input-emoji";
-import { IPostPaginate } from "@/types/home";
 import PostImage from "./post-image";
 import Pusher from "pusher-js";
 import PostDetail from "../modal/post-detail";
 import "@/style/story-slide.css";
+import { IPostPaginate } from "@/types/posts";
 const Post = ({ post }: { post: IPostPaginate }) => {
   const inputRef = useRef();
   const [text, setText] = useState("");
@@ -81,9 +81,9 @@ const Post = ({ post }: { post: IPostPaginate }) => {
             <div className="absolute top-[2px] left-[2px] right-[2px] bottom-[2px] bg-white rounded-full"></div>
             <Image
               src={
-                post.user_profile.avatar_url ?? "https://placehold.it/100x100"
+                post.user_profile?.avatar_url ?? "https://placehold.it/100x100"
               }
-              alt={post.user_profile.nickname}
+              alt={post.user_profile?.nickname ?? ""}
               // width={50}
               // height={50}
               fill
@@ -99,14 +99,14 @@ const Post = ({ post }: { post: IPostPaginate }) => {
             />
           </Link>
           <Link href={""} className="text-xs font-semibold ml-2">
-            {post.user_profile.nickname}
+            {post.user_profile?.nickname}
           </Link>
           <p className="text-xs text-gray-550 font-medium ml-[10px] relative after:content-[''] after:absolute after:w-1 after:h-1 after:-left-[6px] after:bg-black after:rounded-full after:top-1/2 after:-translate-y-1/2">
             {post.post_detail.created_at + ""}
           </p>
         </div>
         <div className="relative w-full h-[468px] border-[1px] border-solid border-gray-400 rounded-md overflow-hidden">
-          <PostImage images_id={post.images_id} />
+          <PostImage images_id={post.images} />
         </div>
         <div className="flex justify-between items-center pt-3 pb-1">
           <div className="flex items-center">
@@ -136,7 +136,7 @@ const Post = ({ post }: { post: IPostPaginate }) => {
         <p className="text-sm font-semibold px-1">{likes} lượt thích</p>
         <div className="flex items-center line-clamp-1 my-1 text-sm px-1">
           <Link href={""} className="font-semibold mr-2">
-            {post.user_profile.nickname}
+            {post.user_profile?.nickname}
           </Link>
           <div className="text-sm">{post.post_detail.caption}</div>
         </div>

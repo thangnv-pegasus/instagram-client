@@ -1,40 +1,31 @@
-"use client";
-
-import FeatureStory from "@/components/slider/feature-story";
-import FeatureItem from "@/components/story/feature-item";
+/* eslint-disable import/no-anonymous-default-export */
 import Avatar from "@/components/users/avatar";
-import { LuGrid } from "react-icons/lu";
-import { FaRegBookmark } from "react-icons/fa";
-import { PiUserSquare } from "react-icons/pi";
-import { useEffect, useState } from "react";
 import Footer from "@/components/layout/footer";
-import PostMini from "@/components/post/post-mini";
-import { IProfile } from "@/types/profile";
-import Image from "next/image";
+import { cookies } from "next/headers";
+import FeatureStory from "@/components/slider/feature-story";
+import PostSection from "@/components/post/my-posts/post-section";
+import { Metadata } from "next";
 
-const Page = ({ params }: { params: { nickname: string } }) => {
-  const [tab, setTab] = useState<Number>(1);
-  const [user, setUser] = useState<IProfile>();
-  const [followers, setFollowers] = useState<Array<number>>([]);
-  const [meFollow, setMeFollow] = useState<Array<number>>([]);
+export const metadata : Metadata = {
+  title: 'Thông tin cá nhân',
+  description: ''
+}
 
-  const getData = async () => {
-    const fetchApi = await fetch(
-      `/api/user/profile?nickname=${params.nickname}`,
-      {
-        method: "get",
-      }
-    );
-    const response = await fetchApi.json();
-    setUser(response.user);
-    setFollowers(response.followers);
-    setMeFollow(response.mefollow)
-    console.log(response);
-  };
-
-  useEffect(() => {
-    getData();
-  }, [params.nickname]);
+// eslint-disable-next-line react/display-name
+export default async function ({ params }: { params: { nickname: string } }) {
+  const cookie = cookies();
+  const token = cookie.get("token")?.value;
+  const fetchApi = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL_API}/profile?nickname=${params.nickname}`,
+    {
+      method: "get",
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    }
+  );
+  // const res = await fetchApi.json();
+  const { user, followers, mefollow } =await fetchApi.json()
 
   return (
     <div className="pl-64">
@@ -45,7 +36,7 @@ const Page = ({ params }: { params: { nickname: string } }) => {
             <div className="flex items-center justify-between select-none pb-2">
               <div className="text-xl font-medium flex items-center">
                 {" "}
-                <p className="mr-2">{user?.nickname}</p>
+                <p className="mr-2">{user.nickname}</p>
                 {user?.is_real == 1 && (
                   <span>
                     <svg
@@ -86,105 +77,34 @@ const Page = ({ params }: { params: { nickname: string } }) => {
             </div>
             <div className="flex py-2 text-sm justify-between select-none">
               <p>
-                <span className="font-semibold">2</span> bài viết
+                <span className="font-semibold">{user.post_length}</span> bài
+                viết
               </p>
               <p>
                 <span className="font-semibold"> {followers.length} </span>{" "}
                 người theo dõi
               </p>
               <p>
-                Đang theo dõi <span className="font-semibold">{meFollow.length}</span> người
+                Đang theo dõi{" "}
+                <span className="font-semibold">{mefollow.length}</span> người
                 dùng
               </p>
             </div>
             <div className="py-2 text-sm select-none">
-              <p className="font-semibold">{user?.fullname}</p>
-              <p>{user?.bio ?? "Chưa thiết lập"}</p>
+              <p className="font-semibold">{user.fullname}</p>
+              <p>{user.bio ?? "Chưa thiết lập"}</p>
             </div>
           </div>
         </div>
         <div className="select-none mb-11">
           <FeatureStory />
         </div>
-        <div className="flex justify-center border-t-2 border-solid border-gray-200 gap-x-14">
-          <button
-            type="button"
-            className={`flex items-center px-3 py-4 text-sm uppercase border-t-2 border-solid -mt-[2px] ${
-              tab === 1
-                ? "text-black border-black"
-                : "text-gray-550 border-transparent"
-            }`}
-            onClick={() => setTab(1)}
-          >
-            {" "}
-            <span className="mr-2">
-              <LuGrid />
-            </span>{" "}
-            Bài viết
-          </button>
-          <button
-            type="button"
-            className={`flex items-center px-3 py-4 text-sm uppercase border-t-2 border-solid -mt-[2px] ${
-              tab === 2
-                ? "text-black border-black"
-                : "text-gray-550 border-transparent"
-            }`}
-            onClick={() => setTab(2)}
-          >
-            {" "}
-            <span className="mr-2">
-              <FaRegBookmark />
-            </span>{" "}
-            Đã lưu
-          </button>
-          <button
-            type="button"
-            className={`flex items-center px-3 py-4 text-sm uppercase border-t-2 border-solid -mt-[2px] ${
-              tab === 3
-                ? "text-black border-black"
-                : "text-gray-550 border-transparent"
-            }`}
-            onClick={() => setTab(3)}
-          >
-            <span className="mr-2 text-lg">
-              <PiUserSquare />
-            </span>
-            Được gắn thẻ
-          </button>
-        </div>
-        {tab === 1 && (
-          <div className="grid grid-cols-3 gap-2 mt-5">
-            <PostMini type="normal" />
-            <PostMini type="normal" />
-            <PostMini type="normal" />
-            <PostMini type="normal" />
-          </div>
-        )}
-        {tab === 2 && (
-          <>
-            <p className="mb-3 mt-5 text-xs text-gray-550">
-              Chỉ mình bạn có thể xem mục mình đã lưu
-            </p>
-            <div className="grid grid-cols-3 gap-2">
-              <PostMini type="normal" />
-              <PostMini type="normal" />
-              <PostMini type="normal" />
-              <PostMini type="normal" />
-            </div>
-          </>
-        )}
-        {tab === 3 && (
-          <div className="grid grid-cols-3 gap-2">
-            <PostMini type="normal" />
-            <PostMini type="normal" />
-            <PostMini type="normal" />
-            <PostMini type="normal" />
-          </div>
-        )}
+
+        <PostSection user={user} />
         <Footer classes="justify-center" />
       </div>
     </div>
   );
-};
+}
 
-export default Page;
+// export default Page;

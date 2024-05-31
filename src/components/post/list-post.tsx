@@ -1,9 +1,9 @@
 "use client";
-import { IPostPaginate } from "@/types/home";
 import { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Post from "@/components/post";
 import PostSkeleton from "./post-skeleton";
+import { IPostPaginate } from "@/types/posts";
 
 const ListPost = () => {
   const [items, setItems] = useState<Array<IPostPaginate>>([]);

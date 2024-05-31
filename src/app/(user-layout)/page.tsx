@@ -3,7 +3,6 @@ import StorySlide from "@/components/slider/story-slide";
 import RelatedUser from "@/components/users/related";
 import { Metadata } from "next";
 import Link from "next/link";
-import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 import { IRecommendUser } from "@/types/home";
 import { Key } from "react";
@@ -16,10 +15,6 @@ export const metadata: Metadata = {
 
 export default async function Home() {
   const cookieStore = cookies();
-  const token = cookieStore.get("token")?.value;
-  if (!token) {
-    return redirect("/login");
-  }
   const fetchApi = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL_API}/home`, {
     method: "get",
     headers: {

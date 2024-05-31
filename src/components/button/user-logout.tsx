@@ -21,7 +21,7 @@ const UserLogoutBtn = ({
     <div className="flex justify-between items-center mb-5">
       <div className="flex items-center">
         <Link
-          href={"/profile"}
+          href={`/profile/${user.nickname}`}
           className="block rounded-full overflow-hidden border-[1px] border-solid border-gray-300"
         >
           <Image
@@ -33,7 +33,7 @@ const UserLogoutBtn = ({
           />
         </Link>
         <div className="pl-2 pr-4 text-sm">
-          <Link href={"/profile"} className="block font-semibold leading-4">
+          <Link href={`/profile/${user.nickname}`} className="block font-semibold leading-4">
             {user.nickname || "nickname"}
           </Link>
           <p className="text-sm text-gray-550">

@@ -1,6 +1,5 @@
 "use client";
 
-import { IImage } from "@/types/home";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
@@ -12,6 +11,7 @@ import "@/style/story-slide.css";
 import { Navigation } from "swiper/modules";
 import { Key } from "react";
 import Image from "next/image";
+import { IImage } from "@/types/image";
 
 const PostImage = ({ images_id }: { images_id: Array<IImage> }) => {
   return (

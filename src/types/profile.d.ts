@@ -15,4 +15,5 @@ export interface IProfile {
   sex: "male" | "female";
   type: "user" | "me";
   updated_at: Date;
+  post_length: number;
 }

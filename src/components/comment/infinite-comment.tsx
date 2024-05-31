@@ -1,3 +1,4 @@
+'use client'
 import { ICcomment } from "@/types/comments";
 import { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -10,18 +11,19 @@ const InfiniteComment = ({ post_id }: { post_id: Number }) => {
 
   useEffect(() => {
     fetchItems();
-  }, [page]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [page, post_id]);
 
   const fetchItems = async () => {
     try {
       const fetchApi = await fetch(
-        `api/comment/list?post=${post_id}&page=${page}`,
+        `/api/comment/list?post=${post_id}&page=${page}`,
         {
-          method: "get",
+          method: "GET",
         }
       );
       const response = await fetchApi.json();
-      if (response.comments.length > 0) {
+      if (response.comments.length > 0 && response.comments) {
         if (items.length === 0) {
           setItems(response.comments);
         } else {

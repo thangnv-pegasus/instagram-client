@@ -17,11 +17,16 @@ export async function GET(request: Request) {
       }
     );
     const res = await fetchBackend.json();
-    return Response.json({
-      status: 200,
-      message: "get comments of posts is successed",
-      comments: res.comments.data,
-    });
+    if(res.status === 200){
+      return Response.json({
+        status: 200,
+        message: "get comments of posts is successed",
+        comments: res.comments.data,
+      });
+    }else{
+    return Response.json({ request: res.request});
+
+    }
   } catch (e) {
     return Response.json({ message: "get comment of post is failed" });
   }
