@@ -17,3 +17,13 @@ export interface IProfile {
   updated_at: Date;
   post_length: number;
 }
+
+export interface IErrorUpdateProfile {
+  bio?: Array<string>;
+  nickname?: Array<string>;
+  fullname?: Array<string>;
+  email?: Array<string>;
+  phone?: Array<string>;
+  dob?: Array<string>;
+  sex?: Array<string>;
+}

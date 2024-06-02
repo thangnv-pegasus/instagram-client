@@ -36,3 +36,40 @@ export async function GET(request: Request) {
     ]);
   }
 }
+
+export async function PATCH(request: Request) {
+  try {
+    const cookie = cookies();
+    const token = cookie.get("token")?.value;
+    const data = await request.json();
+
+    const fetchData = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL_API}/update-profile`,
+      {
+        method: "PATCH",
+        body: JSON.stringify(data),
+        headers: {
+          Authorization: "Bearer " + token,
+          "Content-Type": "appliction/json",
+        },
+      }
+    );
+    const response = await fetchData.json();
+    console.log(response)
+    if (response.status === 200) {
+      return Response.json(response);
+    } else {
+      return Response.json({
+        status: 500,
+        message: "update profile is failed",
+        error: response.error,
+      });
+    }
+  } catch (e) {
+    return Response.json({
+      status: 500,
+      message: "update profile user is failed",
+      error: e,
+    });
+  }
+}

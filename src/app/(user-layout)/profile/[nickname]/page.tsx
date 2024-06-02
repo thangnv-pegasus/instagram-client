@@ -5,11 +5,12 @@ import { cookies } from "next/headers";
 import FeatureStory from "@/components/slider/feature-story";
 import PostSection from "@/components/post/my-posts/post-section";
 import { Metadata } from "next";
+import Link from "next/link";
 
-export const metadata : Metadata = {
-  title: 'Thông tin cá nhân',
-  description: ''
-}
+export const metadata: Metadata = {
+  title: "Thông tin cá nhân",
+  description: "Trang thông tin cá nhân",
+};
 
 // eslint-disable-next-line react/display-name
 export default async function ({ params }: { params: { nickname: string } }) {
@@ -25,7 +26,7 @@ export default async function ({ params }: { params: { nickname: string } }) {
     }
   );
   // const res = await fetchApi.json();
-  const { user, followers, mefollow } =await fetchApi.json()
+  const { user, followers, mefollow } = await fetchApi.json();
 
   return (
     <div className="pl-64">
@@ -61,12 +62,12 @@ export default async function ({ params }: { params: { nickname: string } }) {
                 )}
               </div>
               <div className="flex items-center">
-                <button
-                  type="button"
+                <Link
+                  href={`/profile/${params.nickname}/update-profile`}
                   className="bg-gray-750 text-black text-sm py-1 px-4 mx-4 rounded-md font-semibold"
                 >
                   Chỉnh sửa trang cá nhân
-                </button>
+                </Link>
                 <button
                   type="button"
                   className="bg-gray-750 text-black text-sm py-1 px-4 mx-4 rounded-md font-semibold"
